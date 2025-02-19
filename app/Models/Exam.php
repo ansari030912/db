@@ -30,6 +30,12 @@ class Exam extends Model
         return $this->belongsTo(Vendor::class, 'vendor_id', 'vendor_id');
     }
 
+    // Relationship with SingleExam (One-to-One)
+    public function singleExam()
+    {
+        return $this->hasOne(SingleExam::class, 'exam_id', 'exam_id');
+    }
+
     // Relationship with Certifications (Many-to-Many via exam_certificates)
     public function certifications()
     {

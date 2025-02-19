@@ -20,4 +20,16 @@ class Vendor extends Model
         'vendor_img',
         'vendor_exams',
     ];
+
+    // Relationship with Exams (One-to-Many)
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'vendor_id', 'vendor_id');
+    }
+
+    // Relationship with SingleExam (One-to-Many)
+    public function singleExams()
+    {
+        return $this->hasMany(SingleExam::class, 'vendor_id', 'vendor_id');
+    }
 }

@@ -22,6 +22,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\FetchExamCerts::class,
 
         \App\Console\Commands\UpdateExams::class,
+
+        \App\Console\Commands\FetchHotExams::class,
     ];
 
     protected function schedule(Schedule $schedule)
@@ -35,6 +37,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('certs:update')->hourly();
 
         $schedule->command('product:update')->daily();
+
+        $schedule->command('fetch:hot-exams')->daily();
     }
 
     protected function commands()

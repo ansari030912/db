@@ -11,7 +11,7 @@ class Certificate extends Model
 
     protected $primaryKey = 'cert_id';
     public $incrementing = false;
-    protected $keyType = 'int';
+    protected $keyType = 'unsignedBigInteger';
     protected $fillable = [
         'cert_id',
         'cert_title',

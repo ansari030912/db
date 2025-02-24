@@ -39,6 +39,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('product:update')->daily();
 
         $schedule->command('fetch:hot-exams')->daily();
+
+        $schedule->command('banner:fetch')->everyFifteenMinutes();
     }
 
     protected function commands()

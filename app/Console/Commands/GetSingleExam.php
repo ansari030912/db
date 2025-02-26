@@ -34,7 +34,7 @@ class GetSingleExam extends Command
         foreach ($exams as $exam) {
             $exam_perma = $exam->exam_perma;
             $apiUrl = "https://certsgang.com/v1/exam2/{$exam_perma}";
-
+            $this->info("Fetching URL: {$apiUrl}");  // Add this here
             try {
                 $response = $client->get($apiUrl, [
                     'headers' => [
@@ -46,12 +46,16 @@ class GetSingleExam extends Command
 
                 $data = json_decode($response->getBody()->getContents(), true);
 
+
+
                 if (!$data || !isset($data['exam_perma'])) {
                     $errorExams[] = $exam_perma;
                     Storage::disk('local')->put('missing_exam_permas.json', json_encode($errorExams));
                     $this->error("API returned null or missing exam_perma for '{$exam_perma}'");
                     continue;
                 }
+
+                $this->info("Fetched exam_id: {$data['exam_id']}");  // Add this line to log exam_id
 
                 $singleExam = SingleExam::updateOrCreate(
                     ['exam_perma' => $data['exam_perma']],

@@ -33,7 +33,7 @@ class GetSingleExam extends Command
 
         foreach ($exams as $exam) {
             $exam_perma = $exam->exam_perma;
-            $apiUrl = "https://certsgang.com/v1/exam/{$exam_perma}";
+            $apiUrl = "https://certsgang.com/v1/exam2/{$exam_perma}";
 
             try {
                 $response = $client->get($apiUrl, [

@@ -13,34 +13,58 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\GetVendor::class,
+        \App\Console\Commands\FetchBannerCommand::class,
 
-        \App\Console\Commands\UpdateCertificationsCommand::class,
+        \App\Console\Commands\FetchCoupons::class,
+
+        \App\Console\Commands\FetchExamCertificates::class,
 
         \App\Console\Commands\FetchExamData::class,
 
-        \App\Console\Commands\FetchExamCerts::class,
-
-        \App\Console\Commands\UpdateExams::class,
-
         \App\Console\Commands\FetchHotExams::class,
+
+        \App\Console\Commands\FetchRecentlyUpdatedExams::class,
+
+        \App\Console\Commands\FetchSingleCertificates::class,
+
+        \App\Console\Commands\FetchSingleTrainingCourse::class,
+
+        \App\Console\Commands\GetCertificates::class,
+
+        \App\Console\Commands\GetSingleExam::class,
+
+        \App\Console\Commands\GetTrainingCourses::class,
+
+        \App\Console\Commands\GetVendor::class,
+
+        \App\Console\Commands\UpdateCoupons::class,
     ];
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('vendors:update')->hourly();
+        $schedule->command('banner:fetch')->hourly();
 
-        $schedule->command('certifications:update')->hourly();
+        $schedule->command('fetch:coupons')->daily();
+
+        $schedule->command('fetch:exam-certificates')->hourly();
 
         $schedule->command('exams:update')->hourly();
 
-        $schedule->command('certs:update')->hourly();
+        $schedule->command('fetch:hot-exams')->hourly();
+
+        $schedule->command('fetch:recently-updated')->hourly();
+
+        $schedule->command('fetch:single-cert')->hourly();
+
+        $schedule->command('certifications:update')->hourly();
 
         $schedule->command('product:update')->daily();
 
-        $schedule->command('fetch:hot-exams')->daily();
+        $schedule->command('fetch:training-courses')->daily();
 
-        $schedule->command('banner:fetch')->everyFifteenMinutes();
+        $schedule->command('vendors:update')->daily();
+
+        $schedule->command('coupons:update')->everyFifteenMinutes();
     }
 
     protected function commands()

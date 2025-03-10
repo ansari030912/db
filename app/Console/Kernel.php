@@ -29,6 +29,8 @@ class Kernel extends ConsoleKernel
 
         \App\Console\Commands\FetchSingleTrainingCourse::class,
 
+        \App\Console\Commands\FetchUnlimitedAccessData::class,
+
         \App\Console\Commands\GetCertificates::class,
 
         \App\Console\Commands\GetSingleExam::class,
@@ -46,17 +48,21 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('fetch:coupons')->daily();
 
-        $schedule->command('fetch:exam-certificates')->hourly();
+        $schedule->command('fetch:exam-certificates')->daily();
 
-        $schedule->command('exams:update')->hourly();
+        $schedule->command('exams:update')->daily();
 
-        $schedule->command('fetch:hot-exams')->hourly();
+        $schedule->command('fetch:hot-exams')->daily();
 
-        $schedule->command('fetch:recently-updated')->hourly();
+        $schedule->command('fetch:recently-updated')->daily();
 
-        $schedule->command('fetch:single-cert')->hourly();
+        $schedule->command('fetch:single-cert')->daily();
 
-        $schedule->command('certifications:update')->hourly();
+        $schedule->command('fetch:single-training-courses')->daily();
+
+        $schedule->command('fetch:unlimited-access')->weekly();
+
+        $schedule->command('certifications:update')->daily();
 
         $schedule->command('product:update')->daily();
 
@@ -64,7 +70,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('vendors:update')->daily();
 
-        $schedule->command('coupons:update')->everyFifteenMinutes();
+        $schedule->command('coupons:update')->hourly();
     }
 
     protected function commands()
